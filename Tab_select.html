@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <mata charset="utf-8" />
+    <script src="build/react-0.14.0.js"></script>
+    <script src="build/react-dom-0.14.0.js"></script>
+    <script src="build/browser.min.js"></script>
+    <script src="build/JSXTransformer.js"></script>
+  <style type="text/css">
+      .Tab_item{
+        display: none;
+      }
+      .active,.show{
+        display: block;
+      }
+  </style>
+ </head>
+ <body>
+ <div id="root"></div>
+ <script  type="text/jsx">
+ var TabsControl=React.createClass({
+   getInitialState: function() {
+       return {currentIndex : 0};
+   },
+   check_tittle_index(index){
+       return index===this.state.currentIndex?"Tab_tittle active":"Tab_tittle";
+   },
+   check_item_index(index){
+       return index===this.state.currentIndex?"Tab_item show":"Tab_item";
+   },
+   render:function(){
+        return(
+              <div style={{background:'#ddd',}}>
+                      {/*动态生成Tab导航*/}
+                      <div className="Tab_tittle_wrap">
+                          {
+                            React.Children.map(this.props.children,(element,index)=>{
+                                return(
+                                   /*箭头函数没有自己的this，这里的this继承自外围作用域，即组件本身*/
+                                   <div onClick={()=>{this.setState({currentIndex:index})}} className={this.check_tittle_index(index)}>标题{element.props.name}</div>
+                                );
+                            })
+                          }
+                      </div>
+                      {/*Tab内容区域*/}
+                      <div className="Tab_item_wrap">
+                         {
+                            React.Children.map(this.props.children,(element,index)=>{
+                              return(
+                                  <div className={ this.check_item_index(index) }>{ element }</div>
+                              );
+                            })
+                         }
+                      </div>
+              </div>
+         );
+   }
+ });
+
+var TabComponent=React.createClass({
+      render:function(){
+        return(
+           <div className="container">
+               <TabsControl>
+                   <div name="first">标题一对应的内容：我是第一帧</div>
+                   <div name="second">标题二对应的内容：我是第二帧</div>
+                   <div name="third">标题三对应的内容：我是第三帧</div>
+               </TabsControl>
+           </div>
+         );
+      }
+});
+ReactDOM.render(<TabComponent />, document.getElementById('root'));
+
+</script>
+ </body>
+<html>
