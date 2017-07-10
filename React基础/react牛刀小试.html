@@ -8,10 +8,26 @@
     <script src="../lib/react-dom.js" charset="utf-8"></script>
     <script src="../lib/browser.min.js" charset="utf-8"></script>
     <script type="text/babel">
+        const user = {
+            firstName: 'zuo',
+            lastName: 'baiquan'
+        };
+        const element = (
+            <div>
+                <h1>Hello!</h1>
+                <h2>{user.firstName}{user.lastName}</h2>
+            </div>
+        );
         window.onload=function (){
             var oDiv=document.getElementById('div1');
-            ReactDOM.render(<span>zuobaiquan</span>,oDiv);
+            ReactDOM.render(element,oDiv,function(){
+                console.log('rendered done');  
+            });
         };
+        //ReactDOM.render(element,container,callback)
+        //element 要渲染的的ReactElement
+        //container 渲染结果在DOM中插入的位置
+        //callback 回调函数，可选。传入该值时，会在组件渲染完或更新完成后调用返回值：React组件
     </script>
 </head>
 <body>
