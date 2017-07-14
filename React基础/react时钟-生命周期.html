@@ -26,7 +26,6 @@
 
       tick(){
         var oDate=new Date();
-
         this.setState({
           h: oDate.getHours(),
           m: oDate.getMinutes(),
@@ -40,7 +39,6 @@
       componentDidUpdate(){
         console.log('刚更新完');
       }
-
       render(){
         return <div>
           <span>{this.state.h}</span>:
@@ -52,7 +50,6 @@
 
     window.onload=function (){
       var oDiv=document.getElementById('div1');
-
       ReactDOM.render(
         <Clock/>,
         oDiv
