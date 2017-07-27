@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>Title</title>
+    <script src="../lib/react.js" charset="utf-8"></script>
+    <script src="../lib/react-dom.js" charset="utf-8"></script>
+    <script src="../lib/browser.min.js" charset="utf-8"></script>
+    <style media="screen">
+      .box {width:200px;height:300px;background:#CCC}
+    </style>
+    <script type="text/babel">
+    class ShowHide extends React.Component{
+      constructor(...args){
+        super(...args);
+        this.state={ isLiked:false,linkText:'点赞' };
+      }
+      handleClick(params1,params2,e){
+        //你想在事件函数当中使用当前的实例，需要手动地将实例方法 bind 到当前实例上再传入给 React.js。
+        //传多个参数
+        console.log(this.state.isLiked)
+        console.log(this,params1,params2);
+        console.log(e.target.innerHTML);
+        //this.state.display=this.state.display=='block'?'none':'block';
+        this.setState({
+          isLiked:!this.state.isLiked,
+					linkText:this.state.isLiked?'点赞':'取消'
+        });
+        console.log(this.state.isLiked)
+      }
+      render(){
+        return <button onClick={this.handleClick.bind(this,'Hello React','Hello Vue')}>
+         {this.state.linkText}
+        </button>;
+      }
+    }
+    window.onload=function (){
+      var oDiv=document.getElementById('div1');
+      ReactDOM.render(
+        <ShowHide />,
+        oDiv
+      );
+    };
+    </script>
+  </head>
+  <body>
+    <div id="div1">
+
+    </div>
+  </body>
+</html>
