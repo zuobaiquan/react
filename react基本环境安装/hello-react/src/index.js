@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import CommentApp from './CommentApp'
+import AppTest from './AppTest'
 import './index.css'
 
 ReactDOM.render(
-  <CommentApp />,
+  <AppTest />,
   document.getElementById('root')
 )
