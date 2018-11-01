@@ -21,8 +21,6 @@ React全家桶(技术栈)
 
 
 
-
-
 JSX：
 1.增强型JS语法——HTML代码直接放JS里
 2.babel
