@@ -60,3 +60,5 @@ JSX：
 browser.js
 引入它的作用是使浏览器支持`babel`，你可以使用`ES2015`（javascript下一代标准，具体可以看[阮一峰的ECMAScript 6 入门](http://es6.ruanyifeng.com/)）进行编码。
 如果你用ES5，可以不引入
+
+https://juejin.im/post/5b4c5a945188251b157ba4fc
