@@ -1,5 +1,8 @@
 # React
 
+https://blog.csdn.net/huangpb123/article/details/82765635
+组件
+
 React.js 是一个帮助你构建页面 UI 的库。 React 的组件就相当于 MVC 里面的 View。React.js 不是一个框架，它只是一个库。它只提供 UI （view）层面的解决方案。在实际的项目当中，它并不能解决我们所有的问题，需要结合其它的库，例如 Redux、React-router 等来协助提供完整的解决方法。
 
 好处：
@@ -60,3 +63,5 @@ JSX：
 browser.js
 引入它的作用是使浏览器支持`babel`，你可以使用`ES2015`（javascript下一代标准，具体可以看[阮一峰的ECMAScript 6 入门](http://es6.ruanyifeng.com/)）进行编码。
 如果你用ES5，可以不引入
+
+https://juejin.im/post/5b4c5a945188251b157ba4fc
