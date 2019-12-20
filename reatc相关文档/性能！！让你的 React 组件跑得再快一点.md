@@ -39,7 +39,7 @@ class App extends React.Component {
 
 只要父组件重新渲染了，即使传入子组件的 `props` 未发生变化，那么子组件也会重新渲染，进而触发 `render`。
 
-![img](https://mmbiz.qpic.cn/mmbiz_png/vzEib9IRhZD6ia0XHTa9zcP45CwwOUdwibzNuR7PGaNcKUbo6Fib15Nq5qo9sLsrNCyt1XahhMqWC5VIfm1yM6gj4Q/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![img](./img/01.jpg)
 
 我们对上面的 demo 进行稍微的修改，可以看出当点击按钮的时候，`Child` 组件的 `props` 并没有发生变化，但是也触发了 `render` 方法：
 
