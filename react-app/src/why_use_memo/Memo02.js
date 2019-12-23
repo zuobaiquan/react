@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 
 class Foo extends Component{
+  //使用生命周期函数 shouldComponentUpdate
   shouldComponentUpdate(nextProps,nextState){
     if(nextProps.name==this.props.name){
       return false
