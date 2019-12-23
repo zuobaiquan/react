@@ -14,6 +14,9 @@ class App extends Component {
       age:1
     }
   }
+  callback=()=>{
+
+  };
   render() {
     console.log("render");
     const person = this.state.person
@@ -25,7 +28,7 @@ class App extends Component {
             person
           })
         }}>点击</button>
-        <Foo person={person} />
+        <Foo person={person} cb={this.callback} />
       </div>
     );
   }
