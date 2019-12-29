@@ -1,27 +1,19 @@
 import React,{Component} from 'react';
 
-class Foo extends Component{
-  render(){
-    console.log("Foo render!")
-    return null
-  }
-}
-
-
-class App extends React.Component {
+class App extends Component {
   state={
     count:0
   }
   render() {
     console.log("render");
+    const {count} =this.state
     return (
       <div>
         <button onClick={()=>{
           this.setState({
-            count:this.state.count+1
+            count:count+1
           })
-        }}>点击</button>
-        <Foo name='Mike' />
+        }}>count {count}</button>
       </div>
     );
   }
