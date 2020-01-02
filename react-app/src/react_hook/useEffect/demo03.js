@@ -14,29 +14,31 @@ function App () {
             height:document.documentElement.clientHeight
         })
     }
-    //1 提高了代码复用（合并多个生命周期成了一个函数）
-    //2 优化了关注点分离，即不同的事件放在了不同的 useEffect 函数中
-    //使用副作用在某些生命周期中执行数据的操作
-    useEffect(()=>{
-        document.title = count;
-    })
     useEffect(()=>{
         window.addEventListener('resize',onResize,false);
         return ()=>{ //回调函数，默认是组件重渲染和组件卸载的时候执行
             window.removeEventListener('resize',onResize,false);
         }
     },[]);
-    // ******  useEffect 精髓   ******
-    //上面useEffect函数的空数组的参数，其作用是用于比对。决定该 useEffect 是否执行
-    // 如果第二个参数不写，则每次都会执行这个 useEffect ，如果为空数组，则只执行一次
-    // 如果数组中写了数据，则比对每一个数据，只有数组中的每一项都不变的情况下，才不会再次执行；
-    // 如下面，变化size 不会触发下面useEffect的函数执行
-    // 第二个参数 可选数组，只有数组中的每一项都不变的情况下，才不会再次执行
+    const onClick=()=>{
+        console.log("click")
+    };
     useEffect(()=>{
-        console.log(count);
-    },[count])
+        // 一旦dom元素被替换，我们绑定的事件就失效了，所以我们必须要追踪dom的最新状态
+        // 有了useEffect ，使用回调清理函数，同时保证每次渲染后都会运行
+        // 如果第二个参数不写，则每次都会执行这个 useEffect ，如果为空数组，则只执行一次
+        document.querySelector("#size").addEventListener("click",onClick,false)
+        return ()=>{
+            document.querySelector("#size").removeEventListener("click",onClick,false)
+        }
+    })
     return (
-        <button onClick={()=>{ setCount(count+1)}}>count {count} size:{size.width}X{size.height}</button>
+        <div>
+            <button onClick={()=>{ setCount(count+1) }}>Click {count}</button>
+            {
+                count % 2 ==0 ? <span id="size">size：{size.width}*{size.height}</span> : <p id="size">size：{size.width}*{size.height}</p>
+            }
+        </div>
     )
 }
 
