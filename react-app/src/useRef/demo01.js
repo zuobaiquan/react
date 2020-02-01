@@ -34,8 +34,8 @@ function App() {
           </button>
           <Counter count={count} ref={counterRef} onClick={onClick}/>
 
-            <input ref={inputEl} type="text" />
-            <button onClick={onButtonClick}>Focus the input</button>
+          <input ref={inputEl} type="text" />
+          <button onClick={onButtonClick}>Focus the input</button>
 
       </div>
   )
