@@ -2,7 +2,7 @@ import React,{Component,useRef,useState,memo,useMemo,useCallback} from 'react';
 
 class Counter extends Component {
     speak(){
-        console.log('speak');
+        console.log(`Now counter is: ${this.props.count}`);
     }
     render(){
         console.log("Counter render!");
