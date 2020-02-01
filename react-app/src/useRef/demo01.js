@@ -21,12 +21,22 @@ function App() {
       counterRef.current.speak();//执行子组件中的speak函数,current属性 获取最终的值
   },[counterRef]);
 
+  const inputEl = useRef(null);
+  const onButtonClick = () => {
+    // `current` 指向已挂载到 DOM 上的文本输入元素
+    inputEl.current.focus();
+  };
+
   return (
       <div>
           <button type="button" onClick={()=>{setCount(count+1)}} >
               click:({count})
           </button>
           <Counter count={count} ref={counterRef} onClick={onClick}/>
+
+            <input ref={inputEl} type="text" />
+            <button onClick={onButtonClick}>Focus the input</button>
+
       </div>
   )
 }
