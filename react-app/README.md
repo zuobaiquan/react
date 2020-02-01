@@ -2,9 +2,22 @@
 
 官方文档：https://zh-hans.reactjs.org/docs/hooks-intro.html
 
+https://zh-hans.reactjs.org/docs/hooks-reference.html
+
 https://www.cnblogs.com/xiaozhumaopao/p/10958788.html
 
 react-hook https://zh-hans.reactjs.org/docs/hooks-state.html
 http://www.ruanyifeng.com/blog/2019/09/react-hooks.html
 
 React中useEffect使用 https://www.jianshu.com/p/6e525c3686ab
+
+
+useEffect 没有返回值， 执行的是副作用，一定是在渲染之后完成的；
+
+useMemo 是有返回值的，返回值可以直接参与渲染，是在渲染期间完成的；
+
+useMemo 函数和 useEffect 函数均有第二个参数，决定是否执行该函数。
+
+memo 是针对一段函数逻辑是否重复执行，类似于PureCompoent 作用是优化组件性能，防止组件触发重渲染；
+
+useMemo(()=>{fn}) 等价于 useCallback(fn)

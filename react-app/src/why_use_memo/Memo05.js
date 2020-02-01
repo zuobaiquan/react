@@ -3,7 +3,7 @@ import React,{Component,PureComponent} from 'react';
 /*
   PureComponent 的局限性
 
-  坚决使用PureComponent
+  如果想坚决使用PureComponent
 */
 class Foo extends PureComponent{
   render(){
