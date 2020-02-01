@@ -39,9 +39,9 @@ function App() {
 
   // useMemo(()=>fn);
   // useCallback(fn); useCallback 相当于是简化写法
+  // useMemo(()=>{fn}) 等价于 useCallback(fn)
 
   //这样，就不会因为父组件中的 回调函数 onClick的变化导致子组件发生变化：
-
   // 1 子组件中使用 memo函数可以避免重复渲染，而是根据传入的props发生变化时才渲染；
   // 2 父组件中使用 useMemo函数可以避免因为 回调函数的存在，导致子组件的渲染；
 
