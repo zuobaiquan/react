@@ -18,7 +18,8 @@ function App() {
   const counterRef = useRef();//创建一个ref，在组件中使用该counrerRef
 
   const onClick = useCallback(()=>{
-      counterRef.current.speak();//执行子组件中的speak函数,current属性 获取最终的值
+    console.log("counterRef",counterRef.current);
+    counterRef.current.speak();//执行子组件中的speak函数,current属性 获取最终的值
   },[counterRef]);
 
   const inputEl = useRef(null);
