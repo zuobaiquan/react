@@ -15,6 +15,7 @@ function useCount(defaultCount){
 
   useEffect(()=>{
     if(count>=5){
+       // componentDidUpdate
       clearInterval(timer.current)
     }
   })
