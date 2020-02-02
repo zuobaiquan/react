@@ -2,6 +2,7 @@ import React,{useRef,useEffect,useState} from 'react';
 
 // 自定义hook 方便复用状态逻辑 Custom Hooks
 
+// 它的名字应该始终以 use 开头，这样可以一眼看出其符合 Hook 的规则
 function useCount(defaultCount){
   const [count,setCount] = useState(defaultCount);
   let timer = useRef();
