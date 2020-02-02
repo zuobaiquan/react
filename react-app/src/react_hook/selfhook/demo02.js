@@ -1,5 +1,14 @@
 import React,{useRef,useEffect,useState} from 'react';
 
+// 自定义hook 方便复用状态逻辑 Custom Hooks
+// 这个例子说明 hook 可以返回jsx参与渲染，更说明hook与函数组件的的相似性
+function useCounter(count){
+  return (
+    <h3>{count}</h3>
+  )
+}
+
+
 function useCount(defaultCount){
   const [count,setCount] = useState(defaultCount);
   let timer = useRef();
@@ -23,9 +32,11 @@ function useCount(defaultCount){
 
 function App() {
   let [count,setCount] = useCount(1)
+  let Counter = useCounter(count);
   return (
       <div>
-          <button type="button" onClick={()=>{setCount(count+1)}}> click:({count}) </button>
+          <button type="button"> count:({count}) </button>
+          {Counter}
       </div>
   )
 }
