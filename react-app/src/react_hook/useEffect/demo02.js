@@ -20,6 +20,16 @@ function App () {
     useEffect(()=>{
         document.title = count;
     })
+
+    //useEffect 与 react生命周期
+    // useEffect(()=>{
+    //     //componentDidMount
+    //     return ()=>{
+    //       //componentWillUnmount
+    //       //回调函数，默认是组件重渲染和组件卸载的时候执行
+    //     }
+    // },[]);
+
     useEffect(()=>{
         window.addEventListener('resize',onResize,false);
         return ()=>{ //回调函数，默认是组件重渲染和组件卸载的时候执行
