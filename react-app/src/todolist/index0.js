@@ -4,7 +4,7 @@ import './todo.css'
 let idSeq=Date.now()
 const LS_KEY='$-todos_'
 
-const Control = memo(function Control(props){
+function Control(props){
   const { addTodo}=props
   const inputRef=useRef()
   const onSubmit=(e)=>{
@@ -34,9 +34,9 @@ const Control = memo(function Control(props){
       </form>
     </div>
   )
-})
+}
 
-const TodoItem = memo(function TodoItem(props){
+function TodoItem(props){
   const {
     todo:{
       id,
@@ -62,9 +62,9 @@ const TodoItem = memo(function TodoItem(props){
       <button onClick={onRemove}>&#xd7;</button>
     </li>
   )
-})
+}
 
-const Todos = memo(function Todos(props){
+function Todos(props){
   const {todolist,toggleTodo,removeTodo} = props
   return (
     <ul>
@@ -81,7 +81,7 @@ const Todos = memo(function Todos(props){
     }
     </ul>
   )
-})
+}
 
 function TodoList() {
   const [todolist,setTodos]=useState([])
