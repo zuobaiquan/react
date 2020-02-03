@@ -5,12 +5,10 @@ let idSeq=Date.now()
 
 function Control(props){
   const { addTodo}=props
-
   const inputRef=useRef()
-
   const onSubmit=(e)=>{
     e.preventDefault();
-    const newText=inputRef.current.value.trim()
+    let newText=inputRef.current.value.trim()
     if(newText.length==0){
       return ;
     }
@@ -20,7 +18,6 @@ function Control(props){
       complete:false
     })
     inputRef.current.value=''
-
   }
 
   return (
@@ -29,17 +26,60 @@ function Control(props){
       <form onSubmit={onSubmit}>
         <input
           type="text"
+          ref={inputRef}
           className="new-todo"
-          placeholder="what needs to be done ?"
+          placeholder="请输入内容"
         />
       </form>
     </div>
   )
 }
 
-function Todos(){
-  
-  return <div>Todos</div>
+function TodoItem(props){
+  const {
+    todo:{
+      id,
+      text,
+      complete
+    },
+    toggleTodo,
+    removeTodo
+  } = props
+  const onChange=()=>{
+    toggleTodo(id)
+  }
+  const onRemove=()=>{
+    removeTodo(id)
+  }
+  return (
+    <li className="todo-item">
+      <input
+      type="checkbox"
+      onChange={onChange}
+      checked={complete} />
+      <label className={complete?'complete':''}>{text}</label>
+      <button onClick={onRemove}>&#xd7;</button>
+    </li>
+  )
+}
+
+function Todos(props){
+  const {todos,toggleTodo,removeTodo} = props
+  return (
+    <ul>
+    {
+      todos.map(item=>{
+        return (
+          <TodoItem
+           key={item.id}
+           todo={item}
+           toggleTodo={toggleTodo}
+           removeTodo={removeTodo}
+           />)
+      })
+    }
+    </ul>
+  )
 }
 
 function TodoList() {
