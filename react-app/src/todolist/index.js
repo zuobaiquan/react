@@ -65,11 +65,11 @@ function TodoItem(props){
 }
 
 function Todos(props){
-  const {todos,toggleTodo,removeTodo} = props
+  const {todolist,toggleTodo,removeTodo} = props
   return (
     <ul>
     {
-      todos.map(item=>{
+      todolist.map(item=>{
         return (
           <TodoItem
            key={item.id}
@@ -84,35 +84,36 @@ function Todos(props){
 }
 
 function TodoList() {
-  const [todos,setTodos]=useState([])
+  const [todolist,setTodos]=useState([])
 
   const addTodo=useCallback((todo)=>{
-    setTodos(todos=>[...todos,todo])
+    setTodos(todolist=>[...todolist,todo])
   },[])
   const removeTodo=useCallback((id)=>{
-    setTodos(todos=>todos.filter(item=>{
+    setTodos(todolist=>todolist.filter(item=>{
       return item.id!==id
     }))
   },[])
   const toggleTodo=useCallback((id)=>{
-    setTodos(todos=>todos.map(item=>{
+    setTodos(todolist=>todolist.map(item=>{
       return item.id===id?{...item,complete:!item.complete}:item
     }))
   },[])
-  
+
+  //注意两个useEffect的顺序
   useEffect(()=>{
-    let todos = JSON.parse(localStorage.getItem(LS_KEY) || '[]')
-    setTodos(todos)
+    let todolist = JSON.parse(localStorage.getItem(LS_KEY) || '[]')
+    setTodos(todolist)
   },[]);
 
   useEffect(()=>{
-    localStorage.setItem(LS_KEY,JSON.stringify(todos))
-  },[todos]);
+    localStorage.setItem(LS_KEY,JSON.stringify(todolist))
+  },[todolist]);
 
   return (
     <div className="todo-list">
       <Control addTodo={addTodo} />
-      <Todos removeTodo={removeTodo} toggleTodo={toggleTodo} todos={todos} />
+      <Todos removeTodo={removeTodo} toggleTodo={toggleTodo} todolist={todolist} />
     </div>
   )
 }
