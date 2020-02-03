@@ -1,7 +1,8 @@
-import React,{Component,useRef,useState,memo,useMemo,useCallback} from 'react';
+import React,{Component,useRef,useEffect,useState,memo,useMemo,useCallback} from 'react';
 import './todo.css'
 
 let idSeq=Date.now()
+const LS_KEY='$-todos_'
 
 function Control(props){
   const { addTodo}=props
@@ -98,6 +99,15 @@ function TodoList() {
       return item.id===id?{...item,complete:!item.complete}:item
     }))
   },[])
+  
+  useEffect(()=>{
+    let todos = JSON.parse(localStorage.getItem(LS_KEY) || '[]')
+    setTodos(todos)
+  },[]);
+
+  useEffect(()=>{
+    localStorage.setItem(LS_KEY,JSON.stringify(todos))
+  },[todos]);
 
   return (
     <div className="todo-list">
