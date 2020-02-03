@@ -2,8 +2,6 @@ import React,{Component,useState,memo,useMemo,useCallback} from 'react';
 
 // 用memo包裹Counter函数，只有count发生变化的时候，才执行Count函数
 
-
-
 const Counter = memo(function Counter(props) {
   console.log('doubleCount 发生变化的时候才执行');
   return (

@@ -6,7 +6,6 @@ const Foo = memo(function Foo (props){
   return <div>{props.person.age}</div>
 })
 
-
 class App extends Component {
   state={
     count:0,
