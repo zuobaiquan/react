@@ -14,6 +14,7 @@ const LS_KEY='$-todos_'
 function bindActionCreators(actionCreators,dispatch){
   const ret={}
   for (let key in actionCreators) {
+    // args 不定参数
     ret[key] = function(...args){
       const itemCreator=actionCreators[key]
       const action = itemCreator(...args)
