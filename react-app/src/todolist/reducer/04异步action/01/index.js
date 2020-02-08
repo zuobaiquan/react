@@ -1,29 +1,14 @@
 import React,{Component,useRef,useEffect,useState,memo,useMemo,useCallback} from 'react';
-import '../../todo.css'
+import '../../../todo.css'
 import {
   createSet,
   createAdd,
   createRemove,
   createToggle
 } from './actions.js'
-
+import reducer from  './reducers.js'
 let idSeq=Date.now()
 const LS_KEY='$-todos_'
-
-function combineReducers(reducers){
-  return function reducer(state,action){
-    const changed={}
-    for (let key in reducers) {
-      changed[key]=reducers[key](state[key],action)
-    }
-    return {
-      ...state,
-      ...changed
-    }
-  }
-}
-
-
 
 // **重点函数**
 function bindActionCreators(actionCreators,dispatch){
@@ -122,42 +107,6 @@ function TodoList() {
   const [todolist,setTodolist]=useState([])
   const [incrementCount,setIncrementCount]=useState(0)
 
-  const reducers={
-    todolist(state,action){
-      const {type,payload} = action
-      switch (type) {
-        case 'set':
-          return payload
-        case 'add':
-          return [...state,payload]
-        case 'remove':
-          return state.filter(item=>{
-            return item.id!==payload
-          })
-        case 'toggle':
-          return state.map(item=>{
-            return item.id===payload?{...item,complete:!item.complete}:item
-          })
-        default:
-
-      }
-      return state
-    },
-    incrementCount(state,action){
-      const {type} = action
-      switch (type) {
-        case 'set':case 'add':
-          return state+1
-          break;
-        default:
-      }
-      return state
-    }
-  }
-
-  const reducer =combineReducers(reducers)
-
-
   const dispatch=useCallback((action)=>{
     const state={
       todolist,
@@ -167,17 +116,16 @@ function TodoList() {
       todolist:setTodolist,
       incrementCount:setIncrementCount
     }
+    if('function'===typeof action){
+      action(dispatch,state)
+      return ;
+    }
+
+
     const newState=reducer(state,action)
     for (let key in newState) {
       setters[key](newState[key])
     }
-
-    //todolist
-    // actions.reduce((preTodos,action)=>{
-    //   return [...preTodos,action.payload]
-    // },todolist)
-
-
   },[todolist,incrementCount])
 
   //注意两个useEffect的顺序
