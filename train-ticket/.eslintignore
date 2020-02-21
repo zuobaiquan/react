@@ -1,1 +1,11 @@
-src/serviceWorker.js
+**/node_modules
+**/PPDeal/code/common
+**/PPDWebUI/**/cordova
+**/build
+**/dist
+**/config
+**/test
+**/src
+*.min.js
+gulpfile.js
+.babelrc
