@@ -2,8 +2,10 @@ import React,{Component} from 'react';
 import Dialog from './demo01.js'
 
 class App extends Component {
-  showHandler=()=> {
-    Dialog.show('这是弹层')
+  showHandler=e=> {
+    console.log(e.target.getAttribute("data-id"));
+    Dialog.show(<div>这是弹层</div>)
+    // Dialog.show('这是弹层')
   }
   hideHandler=()=> {
     Dialog.hide()
@@ -11,7 +13,7 @@ class App extends Component {
   render(){
     return (
         <div>
-            <button onClick={this.showHandler}>show Dialog</button>
+            <button data-id="btn" onClick={this.showHandler}>show Dialog</button>
             <button onClick={this.hideHandler}>hide Dialog</button>
         </div>
     )
