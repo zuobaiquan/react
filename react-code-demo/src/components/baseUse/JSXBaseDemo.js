@@ -11,10 +11,15 @@ class JSXBaseDemo extends React.Component {
         }
     }
     render() {
-        return <div>
-            
-            
-        </div>
+      const rawHtml = '<span>富文本内容<i>斜体</i><b>加粗</b></span>'
+      const rawHtmlData = {
+          __html: rawHtml // 注意，必须是这种格式
+      }
+      const rawHtmlElem = <div>
+          <p dangerouslySetInnerHTML={rawHtmlData}></p>
+          <p>{rawHtml}</p>
+      </div>
+      return rawHtmlElem
     }
 }
 
