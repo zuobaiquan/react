@@ -11,6 +11,17 @@ class JSXBaseDemo extends React.Component {
         }
     }
     render() {
+<<<<<<< HEAD
+      const rawHtml = '<span>富文本内容<i>斜体</i><b>加粗</b></span>'
+      const rawHtmlData = {
+          __html: rawHtml // 注意，必须是这种格式
+      }
+      const rawHtmlElem = <div>
+          <p dangerouslySetInnerHTML={rawHtmlData}></p>
+          <p>{rawHtml}</p>
+      </div>
+      return rawHtmlElem
+=======
         // // 获取变量 插值
         // const pElem = <p>{this.state.name}</p>
         // return pElem
@@ -56,6 +67,7 @@ class JSXBaseDemo extends React.Component {
         //     <List/>
         // </div>
         // return componentElem
+>>>>>>> e35b25305c314d6055d3bcf63750e3a96611d230
     }
 }
 
