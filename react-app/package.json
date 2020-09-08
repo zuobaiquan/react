@@ -68,10 +68,10 @@
   },
   "eslintConfig": {
     "extends": "react-app",
-    "plugins":[
+    "plugins": [
       "react-hooks"
     ],
-    "rules":{
+    "rules": {
       "react-hooks/rules-of-hooks": "error"
     }
   },
