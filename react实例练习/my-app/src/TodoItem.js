@@ -7,7 +7,14 @@ class TodoItem extends Component {
   }
   render() {
     const { content } = this.props
+
     return <div onClick={this.handleClick}>{content}</div>;
+
+    // JSX -> createElement -> 虚拟DOM(JS对象) -> 真实的DOM
+
+    // return React.createElement('div',{onClick:this.handleClick},content)
+    //return <div><span>item</span></div>
+    //return React.createElement('div',{},React.createElement('span',{'className':'childid'},'item'))
   }
   handleClick(){
     const { deleteItem,index } = this.props
