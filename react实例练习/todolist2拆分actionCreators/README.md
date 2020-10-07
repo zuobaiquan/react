@@ -12,6 +12,8 @@ https://ant.design/docs/react/introduce-cn
 2. 只有store 能够改变自己的内容
 3. reducer 一定是纯函数
 
+redux = Reducer + Flux
+
 // 纯函数指的是 给定固定的输入，就一定有固定的输出，而且不会有任何副作用
 
 # redux核心API
