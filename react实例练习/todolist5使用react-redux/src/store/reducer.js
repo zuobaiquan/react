@@ -4,14 +4,11 @@ import {
   DELETE_TODO_ITEM,
   INIT_LIST_ACTION,
 } from "./actionTypes";
-
 const defaultState = {
-  inputValue:'',
+  inputValue :'',
   list:[]
 }
-// 纯函数指的是 给定固定的输入，就一定有固定的输出，而且不会有任何副作用（不能做修改）
 export default (state = defaultState, action) => {
-  console.log('action',action)
   if (action.type === CHANGE_INPUT_VALUE) {
     // 只有store 能够改变自己的内容
     // reducer 可以接受一个state，但是绝对不能改变state，所以需要重新拷贝一份 state
@@ -34,7 +31,7 @@ export default (state = defaultState, action) => {
   }
   if (action.type === INIT_LIST_ACTION) {
     const newState = JSON.parse(JSON.stringify(state));
-    newState.list = action.data
+    newState.list = action.data;
     return newState;
   }
   return state;
