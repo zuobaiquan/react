@@ -11,6 +11,8 @@ https://github.com/gajus/redux-immutable
 
 immutable和redux-immutable的使用
 
+关于immutable一片不错的文章 https://blog.csdn.net/javascript_panjialin/article/details/53841688
+
 
 # 安装
 npm install immutable --save
