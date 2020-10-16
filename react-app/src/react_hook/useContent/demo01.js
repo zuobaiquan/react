@@ -1,4 +1,4 @@
-import React, { Component, useState, createContext } from 'react';
+import React, { Component, createContext } from 'react';
 const CountContext = createContext();
 
 class Foo extends Component {
@@ -13,17 +13,23 @@ class Foo extends Component {
 	}
 }
 
-function App() {
+class App extends Component {
+	state = {
+		count: 0
+	}
 	//定义初始化数据
-	const [count, setCount] = useState(0);
-	return (
-		<div>
-			<button onClick={() => { setCount(count + 1) }}>count11 {count} </button>
-			<CountContext.Provider value={count}>
-				<Foo />
-			</CountContext.Provider>
-		</div>
-	)
+	render() {
+		let { count } = this.state
+		return (
+			<div>
+				<button onClick={() => { this.setState({ count: count + 1 }) }}>count {count} </button>
+				<CountContext.Provider value={count}>
+					<Foo />
+				</CountContext.Provider>
+			</div>
+		)
+	}
+
 }
 
 export default App;
