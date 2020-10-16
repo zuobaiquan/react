@@ -1,37 +1,37 @@
-import React,{Component} from 'react';
+import React, { Component } from 'react';
 
 class App extends Component {
-  state = {
-      count:0,
-      size:{
-        width:document.documentElement.clientWidth,
-        height:document.documentElement.clientHeight
-      }
-  }
-  onResize = ()=>{
-    this.setState({
-        size:{
-            width:document.documentElement.clientWidth,
-            height:document.documentElement.clientHeight
-        }
-    })
-  }
-  componentDidMount(){
-      document.title = this.state.count;
-      window.addEventListener('resize',this.onResize,false);
-  }
-  componentDidUpdate(){
-      document.title = this.state.count;
-  }
-  componentWillUnmount(){
-      window.removeEventListener('resize',this.onResize,false);
-  }
-  render(){ 
-      let { count,size } = this.state;
-      return (
-          <button onClick={()=>{ this.setState({count:count+1})}}>count {count} size:{size.width}X{size.height}</button>
-      )
-  }
+	state = {
+		count: 0,
+		size: {
+			width: document.documentElement.clientWidth,
+			height: document.documentElement.clientHeight
+		}
+	}
+	onResize = () => {
+		this.setState({
+			size: {
+				width: document.documentElement.clientWidth,
+				height: document.documentElement.clientHeight
+			}
+		})
+	}
+	componentDidMount() {
+		document.title = this.state.count;
+		window.addEventListener('resize', this.onResize, false);
+	}
+	componentDidUpdate() {
+		document.title = this.state.count;
+	}
+	componentWillUnmount() {
+		window.removeEventListener('resize', this.onResize, false);
+	}
+	render() {
+		let { count, size } = this.state;
+		return (
+			<button onClick={() => { this.setState({ count: count + 1 }) }}>count {count} size:{size.width}X{size.height}</button>
+		)
+	}
 }
 
 export default App;
