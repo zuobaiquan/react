@@ -1,24 +1,25 @@
-import React,{Component,PureComponent} from 'react';
+import React, { Component, PureComponent } from 'react';
 
 /*
   PureComponent 的局限性
 
   坚决使用PureComponent
 */
-class Foo extends PureComponent{
-  render(){
+class Foo extends PureComponent {
+  render() {
     console.log("Foo render!")
     return <div>{this.props.person.age}</div>
   }
 }
 class App extends Component {
-  state={
-    count:0,
-    person:{
-      age:1
+  state = {
+    count: 0,
+    person: {
+      age: 1
     }
   }
-  callback=()=>{
+  //使用箭头函数
+  callback = () => {
 
   };
   render() {
@@ -26,7 +27,7 @@ class App extends Component {
     const person = this.state.person
     return (
       <div>
-        <button onClick={()=>{
+        <button onClick={() => {
           person.age++;
           this.setState({
             person
