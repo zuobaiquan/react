@@ -12,13 +12,10 @@ class Foo extends Component {
 		)
 	}
 }
-
-class Bar extends Component {
-	static contextType = CountContext;
+class Middle extends Component {
 	render() {
-		const count = this.context;
 		return (
-			<h1>{count}</h1>
+			<Foo />
 		)
 	}
 }
@@ -30,8 +27,7 @@ function App() {
 		<div>
 			<button onClick={() => { setCount(count + 1) }}>count {count} </button>
 			<CountContext.Provider value={count}>
-				<Foo />
-				<Bar />
+				<Middle />
 			</CountContext.Provider>
 		</div>
 	)
