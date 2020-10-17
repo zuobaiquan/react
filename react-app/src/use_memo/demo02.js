@@ -1,4 +1,4 @@
-import React, { Component, useState, memo, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 
 //无状态组件
 function Counter(props) {

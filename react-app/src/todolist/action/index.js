@@ -1,4 +1,4 @@
-import React,{Component,useRef,useEffect,useState,memo,useMemo,useCallback} from 'react';
+import React, { useRef, useEffect, useState, memo, useCallback } from 'react';
 import '../../todo.css'
 import {
   createSet,
@@ -7,24 +7,24 @@ import {
   createToggle
 } from './actions.js'
 
-let idSeq=Date.now()
-const LS_KEY='$-todos_'
+let idSeq = Date.now()
+const LS_KEY = '$-todos_'
 
-const Control = memo(function Control(props){
-  const { dispatch }=props
-  const inputRef=useRef()
-  const onSubmit=(e)=>{
+const Control = memo(function Control(props) {
+  const { dispatch } = props
+  const inputRef = useRef()
+  const onSubmit = (e) => {
     e.preventDefault();
-    let newText=inputRef.current.value.trim()
-    if(newText.length==0){
-      return ;
+    let newText = inputRef.current.value.trim()
+    if (newText.length == 0) {
+      return;
     }
     dispatch(createAdd({
-      id:++idSeq,
-      text:newText,
-      complete:false
+      id: ++idSeq,
+      text: newText,
+      complete: false
     }))
-    inputRef.current.value=''
+    inputRef.current.value = ''
   }
 
   return (
@@ -42,84 +42,84 @@ const Control = memo(function Control(props){
   )
 })
 
-const TodoItem = memo(function TodoItem(props){
+const TodoItem = memo(function TodoItem(props) {
   const {
-    todo:{
+    todo: {
       id,
       text,
       complete
     },
     dispatch
   } = props
-  const onChange=()=>{
+  const onChange = () => {
     dispatch(createToggle(id))
   }
-  const onRemove=()=>{
+  const onRemove = () => {
     dispatch(createRemove(id))
   }
   return (
     <li className="todo-item">
       <input
-      type="checkbox"
-      onChange={onChange}
-      checked={complete} />
-      <label className={complete?'complete':''}>{text}</label>
+        type="checkbox"
+        onChange={onChange}
+        checked={complete} />
+      <label className={complete ? 'complete' : ''}>{text}</label>
       <button onClick={onRemove}>&#xd7;</button>
     </li>
   )
 })
 
-const Todos = memo(function Todos(props){
-  const {todolist,dispatch} = props
+const Todos = memo(function Todos(props) {
+  const { todolist, dispatch } = props
   return (
     <ul>
-    {
-      todolist.map(item=>{
-        return (
-          <TodoItem
-           key={item.id}
-           todo={item}
-           dispatch={dispatch}
-           />)
-      })
-    }
+      {
+        todolist.map(item => {
+          return (
+            <TodoItem
+              key={item.id}
+              todo={item}
+              dispatch={dispatch}
+            />)
+        })
+      }
     </ul>
   )
 })
 
 function TodoList() {
-  const [todolist,setTodos]=useState([])
-  const dispatch=useCallback((action)=>{
-    const {type,payload} = action
+  const [todolist, setTodos] = useState([])
+  const dispatch = useCallback((action) => {
+    const { type, payload } = action
     switch (type) {
       case 'set':
         setTodos(payload)
         break;
       case 'add':
-        setTodos(todolist=>[...todolist,payload])
+        setTodos(todolist => [...todolist, payload])
         break;
       case 'remove':
-        setTodos(todolist=>todolist.filter(item=>{
-          return item.id!==payload
+        setTodos(todolist => todolist.filter(item => {
+          return item.id !== payload
         }))
         break;
       case 'toggle':
-        setTodos(todolist=>todolist.map(item=>{
-          return item.id===payload?{...item,complete:!item.complete}:item
+        setTodos(todolist => todolist.map(item => {
+          return item.id === payload ? { ...item, complete: !item.complete } : item
         }))
       default:
     }
-  },[])
+  }, [])
 
   //注意两个useEffect的顺序
-  useEffect(()=>{
+  useEffect(() => {
     let todolist = JSON.parse(localStorage.getItem(LS_KEY) || '[]')
     dispatch(createSet(todolist))
-  },[]);
+  }, [dispatch]);
 
-  useEffect(()=>{
-    localStorage.setItem(LS_KEY,JSON.stringify(todolist))
-  },[todolist]);
+  useEffect(() => {
+    localStorage.setItem(LS_KEY, JSON.stringify(todolist))
+  }, [todolist]);
 
   return (
     <div className="todo-list">
