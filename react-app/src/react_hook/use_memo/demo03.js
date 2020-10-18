@@ -15,7 +15,8 @@ function App() {
   const [count, setCount] = useState(0)
   const doubleCount = useMemo(() => {
     return count * 2
-  }, [count])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [count === 3])
   //当 count== 3 的时候，useMemo中数组的值由 false变为true， double 发生变化
   //当 count ==4 的时候，useMemo 中数组的值。由true 变为 false，double 再次发生变化；
   return (
