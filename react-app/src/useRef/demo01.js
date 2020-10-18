@@ -1,26 +1,26 @@
-import React,{Component,useRef,useState,memo,useMemo,useCallback} from 'react';
+import React, { Component, useRef, useState, useCallback } from 'react';
 
 class Counter extends Component {
-    speak(){
-        console.log(`Now counter is: ${this.props.count}`);
-    }
-    render(){
-        console.log("Counter render!");
-        const { props } = this;
-        return (
-            <h1 onClick={props.onClick}>{props.count}</h1>
-　　　　　)
-     }
+  speak() {
+    console.log(`Now counter is: ${this.props.count}`);
+  }
+  render() {
+    console.log("Counter render!");
+    const { props } = this;
+    return (
+      <h1 onClick={props.onClick}>{props.count}</h1>
+    )
+  }
 }
 
 function App() {
-  const [count,setCount] = useState(0);
+  const [count, setCount] = useState(0);
   const counterRef = useRef();//创建一个ref，在组件中使用该counrerRef
 
-  const onClick = useCallback(()=>{
-    console.log("counterRef",counterRef.current);
+  const onClick = useCallback(() => {
+    console.log("counterRef", counterRef.current);
     counterRef.current.speak();//执行子组件中的speak函数,current属性 获取最终的值
-  },[counterRef]);
+  }, [counterRef]);
 
   const inputEl = useRef(null);
   const onButtonClick = () => {
@@ -29,16 +29,16 @@ function App() {
   };
 
   return (
-      <div>
-          <button type="button" onClick={()=>{setCount(count+1)}} >
-              click:({count})
+    <div>
+      <button type="button" onClick={() => { setCount(count + 1) }} >
+        click:({count})
           </button>
-          <Counter count={count} ref={counterRef} onClick={onClick}/>
+      <Counter count={count} ref={counterRef} onClick={onClick} />
 
-          <input ref={inputEl} type="text" />
-          <button onClick={onButtonClick}>Focus the input</button>
+      <input ref={inputEl} type="text" />
+      <button onClick={onButtonClick}>Focus the input</button>
 
-      </div>
+    </div>
   )
 }
 
