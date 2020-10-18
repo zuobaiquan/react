@@ -1,22 +1,41 @@
-import React from 'react';
+import React, { Component, memo } from 'react';
+// , PureComponent, memo, useState, useMemo, useCallback
 
-class App extends React.Component {
+
+const Foo = memo(function Foo(props) {
+  console.log('Foo reander');
+  return <div>子组件person.age的值：{props.person.age}</div>;
+})
+
+class App extends Component {
+
   state = {
-    a: 1
+    count: 0,
+    person: {
+      age: 18
+    }
   };
+
+  callback = () => { }
+
   render() {
-    console.log("render");
+    const person = this.state.person;
     return (
-      <div>
-        <p>{this.state.a}</p>
+      <div className="app">
+        <p>count值：{this.state.count}</p>
+        <Foo person={person} cb={this.callback} />
         <button
           onClick={() => {
-            this.setState({ a: 1 }); // 这里并没有改变 a 的值
-          }}
-        >Click me</button>
-        <button onClick={() => this.setState(null)}>setState null</button>
+            person.age++
+            this.setState({
+              count: this.state.count + 1,
+              person
+            })
+          }}>
+          Add
+        </button>
       </div>
-    );
+    )
   }
 }
 
