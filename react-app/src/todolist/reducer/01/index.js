@@ -1,4 +1,4 @@
-import React,{Component,useRef,useEffect,useState,memo,useMemo,useCallback} from 'react';
+import React, { useRef, useEffect, useState, memo, useCallback } from 'react';
 import '../../todo.css'
 import {
   createSet,
@@ -7,16 +7,16 @@ import {
   createToggle
 } from './actions.js'
 
-let idSeq=Date.now()
-const LS_KEY='$-todos_'
+let idSeq = Date.now()
+const LS_KEY = '$-todos_'
 
 // **重点函数**
-function bindActionCreators(actionCreators,dispatch){
-  const ret={}
+function bindActionCreators(actionCreators, dispatch) {
+  const ret = {}
   for (let key in actionCreators) {
     // args 不定参数
-    ret[key] = function(...args){
-      const itemCreator=actionCreators[key]
+    ret[key] = function (...args) {
+      const itemCreator = actionCreators[key]
       const action = itemCreator(...args)
       dispatch(action)
     }
@@ -24,21 +24,21 @@ function bindActionCreators(actionCreators,dispatch){
   return ret
 }
 
-const Control = memo(function Control(props){
-  const { addTodo }=props
-  const inputRef=useRef()
-  const onSubmit=(e)=>{
+const Control = memo(function Control(props) {
+  const { addTodo } = props
+  const inputRef = useRef()
+  const onSubmit = (e) => {
     e.preventDefault();
-    let newText=inputRef.current.value.trim()
-    if(newText.length==0){
-      return ;
+    let newText = inputRef.current.value.trim()
+    if (newText.length == 0) {
+      return;
     }
     addTodo({
-      id:++idSeq,
-      text:newText,
-      complete:false
+      id: ++idSeq,
+      text: newText,
+      complete: false
     })
-    inputRef.current.value=''
+    inputRef.current.value = ''
   }
 
   return (
@@ -56,9 +56,9 @@ const Control = memo(function Control(props){
   )
 })
 
-const TodoItem = memo(function TodoItem(props){
+const TodoItem = memo(function TodoItem(props) {
   const {
-    todo:{
+    todo: {
       id,
       text,
       complete
@@ -66,76 +66,75 @@ const TodoItem = memo(function TodoItem(props){
     removeTodo,
     toggleTodo
   } = props
-  const onChange=()=>{
+  const onChange = () => {
     toggleTodo(id)
   }
-  const onRemove=()=>{
+  const onRemove = () => {
     removeTodo(id)
   }
   return (
     <li className="todo-item">
       <input
-      type="checkbox"
-      onChange={onChange}
-      checked={complete} />
-      <label className={complete?'complete':''}>{text}</label>
+        type="checkbox"
+        onChange={onChange}
+        checked={complete} />
+      <label className={complete ? 'complete' : ''}>{text}</label>
       <button onClick={onRemove}>&#xd7;</button>
     </li>
   )
 })
 
-const Todos = memo(function Todos(props){
-  const {todolist,toggleTodo,removeTodo} = props
+const Todos = memo(function Todos(props) {
+  const { todolist, toggleTodo, removeTodo } = props
   return (
     <ul>
-    {
-      todolist.map(item=>{
-        return (
-          <TodoItem
-           key={item.id}
-           todo={item}
-           toggleTodo={toggleTodo}
-           removeTodo={removeTodo}
-           />)
-      })
-    }
+      {
+        todolist.map(item => {
+          return (
+            <TodoItem
+              key={item.id}
+              todo={item}
+              toggleTodo={toggleTodo}
+              removeTodo={removeTodo}
+            />)
+        })
+      }
     </ul>
   )
 })
 
 function TodoList() {
-  const [todolist,setTodolist]=useState([])
-  const [incrementCount,setIncrementCount]=useState(0)
+  const [todolist, setTodolist] = useState([])
+  const [incrementCount, setIncrementCount] = useState(0)
 
-  function reducer(state,action){
-    const { type,payload } =action
-    const { todolist,incrementCount}=state
+  function reducer(state, action) {
+    const { type, payload } = action
+    const { todolist, incrementCount } = state
     switch (type) {
       case 'set':
         return {
           ...state,
-          todolist:payload,
-          incrementCount:incrementCount+1
+          todolist: payload,
+          incrementCount: incrementCount + 1
         }
-        break;
       case 'add':
         return {
           ...state,
-          todolist:[...todolist,payload],
-          incrementCount:incrementCount+1
+          todolist: [...todolist, payload],
+          incrementCount: incrementCount + 1
         }
       case 'remove':
         return {
           ...state,
-          todolist:todolist.filter(item=>{
-            return item.id!==payload
+          todolist: todolist.filter(item => {
+            return item.id !== payload
           })
         }
       case 'toggle':
         return {
           ...state,
-          todolist:todolist.map(item=>{
-            return item.id===payload?{...item,complete:!item.complete}:item
+          todolist: todolist.map(item => {
+            return item.id === payload ? { ...item, complete: !item.complete } : item
           })
         }
       default:
@@ -144,35 +143,35 @@ function TodoList() {
   }
 
 
-  const dispatch=useCallback((action)=>{
-    const state={
+  const dispatch = useCallback((action) => {
+    const state = {
       todolist,
       incrementCount
     }
-    const setters={
-      todolist:setTodolist,
-      incrementCount:setIncrementCount
+    const setters = {
+      todolist: setTodolist,
+      incrementCount: setIncrementCount
     }
-    const newState=reducer(state,action)
+    const newState = reducer(state, action)
     for (let key in newState) {
       setters[key](newState[key])
     }
-  },[todolist,incrementCount])
+  }, [todolist, incrementCount])
 
   //注意两个useEffect的顺序
-  useEffect(()=>{
+  useEffect(() => {
     let todolist = JSON.parse(localStorage.getItem(LS_KEY) || '[]')
     dispatch(createSet(todolist))
-  },[]);
+  }, []);
 
-  useEffect(()=>{
-    localStorage.setItem(LS_KEY,JSON.stringify(todolist))
-  },[todolist]);
+  useEffect(() => {
+    localStorage.setItem(LS_KEY, JSON.stringify(todolist))
+  }, [todolist]);
 
   return (
     <div className="todo-list">
-      <Control { ...bindActionCreators({addTodo:createAdd},dispatch)} />
-      <Todos { ...bindActionCreators({removeTodo:createRemove,toggleTodo:createToggle},dispatch)} todolist={todolist} />
+      <Control {...bindActionCreators({ addTodo: createAdd }, dispatch)} />
+      <Todos {...bindActionCreators({ removeTodo: createRemove, toggleTodo: createToggle }, dispatch)} todolist={todolist} />
     </div>
   )
 }

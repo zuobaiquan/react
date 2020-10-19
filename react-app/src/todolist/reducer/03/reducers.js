@@ -1,8 +1,8 @@
-function combineReducers(reducers){
-  return function reducer(state,action){
-    const changed={}
+function combineReducers(reducers) {
+  return function reducer(state, action) {
+    const changed = {}
     for (let key in reducers) {
-      changed[key]=reducers[key](state[key],action)
+      changed[key] = reducers[key](state[key], action)
     }
     return {
       ...state,
@@ -10,33 +10,32 @@ function combineReducers(reducers){
     }
   }
 }
-const reducers={
-  todolist(state,action){
-    const {type,payload} = action
+const reducers = {
+  todolist(state, action) {
+    const { type, payload } = action
     switch (type) {
       case 'set':
         return payload
       case 'add':
-        return [...state,payload]
+        return [...state, payload]
       case 'remove':
-        return state.filter(item=>{
-          return item.id!==payload
+        return state.filter(item => {
+          return item.id !== payload
         })
       case 'toggle':
-        return state.map(item=>{
-          return item.id===payload?{...item,complete:!item.complete}:item
+        return state.map(item => {
+          return item.id === payload ? { ...item, complete: !item.complete } : item
         })
       default:
 
     }
     return state
   },
-  incrementCount(state,action){
-    const {type} = action
+  incrementCount(state, action) {
+    const { type } = action
     switch (type) {
-      case 'set':case 'add':
-        return state+1
-        break;
+      case 'set': case 'add':
+        return state + 1
       default:
     }
     return state
