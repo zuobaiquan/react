@@ -30,7 +30,7 @@ const Control = memo(function Control(props) {
   const onSubmit = (e) => {
     e.preventDefault();
     let newText = inputRef.current.value.trim()
-    if (newText.length == 0) {
+    if (newText.length === 0) {
       return;
     }
     addTodo({
