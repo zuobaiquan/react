@@ -33,7 +33,7 @@ export const NavItem = styled.li`
   line-height: 56px;
 	padding: 0 15px;
 	font-size: 17px;
-	color: #333;åå
+	color: #333;
 	&.right {
 		color: #969696;
 	}
@@ -47,7 +47,7 @@ export const SearchWrapper = styled.div`
 export const SearchInput = styled.input.attrs({
 	placeholder: '搜索'
 })`
-	width: 240px;
+	width: ${props => (props.focus ? "320px" : "240px")};
 	height: 38px;
 	padding: 0 30px 0 20px;
 	margin-left: 20px;
@@ -58,11 +58,10 @@ export const SearchInput = styled.input.attrs({
 	background: #eee;
 	font-size: 14px;
 	color: #666;
+	transition: width .5s;
+	transition-delay: .1s;
 	&::placeholder {
 		color: #999;
-	}
-	&.focused {
-		width: 240px;
 	}
 	&.slide-enter {
 		transition: all .2s ease-out;
@@ -77,6 +76,25 @@ export const SearchInput = styled.input.attrs({
 		width: 160px;
 	}
 `;
+export const SearchIcon = styled.span`
+	position: absolute;
+	right: 5px;
+	bottom: 5px;
+	width: 30px;
+	line-height: 30px;
+	border-radius: 50%;
+	text-align: center;
+	cursor:pointer;
+	.iconfont{
+		color:#969696;
+	}
+	&.focused{
+		background:#969696;
+		.iconfont{
+			color:#fff;
+		}
+	}
+`
 export const WriteBook = styled.a`
 	position: absolute;
 	top: 0;
