@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { actionCreator } from './store'
 import {
   HeaderWraper,
   Logo,
@@ -10,24 +12,8 @@ import {
   SearchIcon,
 } from './style'
 class Header extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      focused: false,
-    }
-  }
-  handleInputFocus = () => {
-    this.setState({
-      focused: true
-    })
-  }
-  handleInputBlur = () => {
-    this.setState({
-      focused: false
-    })
-  }
   render() {
-    const { focused } = this.state
+    const { focused } = this.props
     return (
       <HeaderWraper>
         <Logo />
@@ -37,8 +23,8 @@ class Header extends Component {
           <SearchWrapper>
             <SearchInput
               focus={focused}
-              onFocus={() => this.handleInputFocus()}
-              onBlur={() => this.handleInputBlur()}
+              onFocus={this.props.handleInputFocus}
+              onBlur={this.props.handleInputBlur}
             ></SearchInput>
             <SearchIcon className={focused ? 'focused' : ''}><span className="iconfont">&#xe64d;</span></SearchIcon>
           </SearchWrapper>
@@ -48,4 +34,20 @@ class Header extends Component {
     )
   }
 }
-export default Header
+const mapStateToProps = (state) => {
+  return {
+    focused: state.header.focused
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleInputFocus() {
+      dispatch(actionCreator.searchFocus())
+    },
+    handleInputBlur() {
+      dispatch(actionCreator.searchBlur())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
