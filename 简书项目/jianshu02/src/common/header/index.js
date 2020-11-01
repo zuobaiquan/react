@@ -17,6 +17,26 @@ import {
   SearchInfoItem,
 } from './style'
 class Header extends Component {
+
+  getListArea(show) {
+    if (show) {
+      return (
+        <SearchInfo>
+          <SearchInfoTitle>热门搜索<SearchInfoSwitch><span className="iconfont">&#xe601;</span>换一批</SearchInfoSwitch></SearchInfoTitle>
+          <SearchInfoList>
+            <SearchInfoItem>教育</SearchInfoItem>
+            <SearchInfoItem>教育</SearchInfoItem>
+            <SearchInfoItem>教育</SearchInfoItem>
+            <SearchInfoItem>教育</SearchInfoItem>
+            <SearchInfoItem>教育</SearchInfoItem>
+            <SearchInfoItem>教育</SearchInfoItem>
+          </SearchInfoList>
+        </SearchInfo>
+      )
+    } else {
+      return null
+    }
+  }
   render() {
     const { focused } = this.props
     return (
@@ -32,17 +52,7 @@ class Header extends Component {
               onBlur={this.props.handleInputBlur}
             ></SearchInput>
             <SearchIcon className={focused ? 'focused' : ''}><span className="iconfont">&#xe64d;</span></SearchIcon>
-            <SearchInfo>
-              <SearchInfoTitle>热门搜索<SearchInfoSwitch><span className="iconfont">&#xe601;</span>换一批</SearchInfoSwitch></SearchInfoTitle>
-              <SearchInfoList>
-                <SearchInfoItem>教育</SearchInfoItem>
-                <SearchInfoItem>教育</SearchInfoItem>
-                <SearchInfoItem>教育</SearchInfoItem>
-                <SearchInfoItem>教育</SearchInfoItem>
-                <SearchInfoItem>教育</SearchInfoItem>
-                <SearchInfoItem>教育</SearchInfoItem>
-              </SearchInfoList>
-            </SearchInfo>
+            {this.getListArea()}
           </SearchWrapper>
         </Nav>
         <WriteBook><span className="iconfont">&#xe604;</span>写文章</WriteBook>
