@@ -63,18 +63,6 @@ export const SearchInput = styled.input.attrs({
 	&::placeholder {
 		color: #999;
 	}
-	&.slide-enter {
-		transition: all .2s ease-out;
-	}
-	&.slide-enter-active {
-		width: 240px;
-	}
-	&.slide-exit {
-		transition: all .2s ease-out;
-	}
-	&.slide-exit-active {
-		width: 160px;
-	}
 `;
 export const SearchIcon = styled.span`
 	position: absolute;
@@ -125,7 +113,6 @@ export const SearchInfo = styled.div`
 	padding: 0 20px;
 	box-shadow: 0 0 8px rgba(0, 0, 0, .2);
 	background: #fff;
-	height:200px;
 	border-radius:2px;
 `
 export const SearchInfoTitle = styled.div`
@@ -139,6 +126,7 @@ export const SearchInfoSwitch = styled.div`
 	float: right;
 	font-size: 13px;
 	cursor: pointer;
+	user-select:none;
 	.iconfont{
 		font-size: 18px;
     display: inline-block;

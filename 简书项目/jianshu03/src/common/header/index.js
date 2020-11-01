@@ -17,19 +17,24 @@ import {
   SearchInfoItem,
 } from './style'
 class Header extends Component {
+  getListArea() {
+    const { focused, list, page, totalPage, mouseIn, handleMouseEnter, handleMouseLeave, handleChangePage } = this.props
+    const newList = list.toJS();
+    const pageList = []
+    if (newList.length) {
+      for (let i = (page - 1) * 10; i < page * 10; i++) {
+        pageList.push(
+          <SearchInfoItem key={newList[i]}>{newList[i]}</SearchInfoItem>
+        )
+      }
+    }
 
-  getListArea(show) {
-    if (show) {
+    if (focused || mouseIn) {
       return (
-        <SearchInfo>
-          <SearchInfoTitle>热门搜索<SearchInfoSwitch><span className="iconfont">&#xe601;</span>换一批</SearchInfoSwitch></SearchInfoTitle>
+        <SearchInfo onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+          <SearchInfoTitle>热门搜索<SearchInfoSwitch onClick={() => handleChangePage(page, totalPage)}><span className="iconfont">&#xe601;</span>换一批</SearchInfoSwitch></SearchInfoTitle>
           <SearchInfoList>
-            <SearchInfoItem>教育</SearchInfoItem>
-            <SearchInfoItem>教育</SearchInfoItem>
-            <SearchInfoItem>教育</SearchInfoItem>
-            <SearchInfoItem>教育</SearchInfoItem>
-            <SearchInfoItem>教育</SearchInfoItem>
-            <SearchInfoItem>教育</SearchInfoItem>
+            {pageList}
           </SearchInfoList>
         </SearchInfo>
       )
@@ -38,7 +43,7 @@ class Header extends Component {
     }
   }
   render() {
-    const { focused } = this.props
+    const { focused, handleInputFocus, handleInputBlur, list } = this.props
     return (
       <HeaderWraper>
         <Logo />
@@ -48,8 +53,8 @@ class Header extends Component {
           <SearchWrapper>
             <SearchInput
               focus={focused}
-              onFocus={this.props.handleInputFocus}
-              onBlur={this.props.handleInputBlur}
+              onFocus={() => handleInputFocus(list)}
+              onBlur={handleInputBlur}
             ></SearchInput>
             <SearchIcon className={focused ? 'focused' : ''}><span className="iconfont">&#xe64d;</span></SearchIcon>
             {this.getListArea()}
@@ -63,16 +68,34 @@ class Header extends Component {
 const mapStateToProps = (state) => {
   return {
     focused: state.getIn(['header', 'focused']),
+    list: state.getIn(['header', 'list']),
     // focused: state.get('header').get('focused')
+    page: state.getIn(['header', 'page']),
+    totalPage: state.getIn(['header', 'totalPage']),
+    mouseIn: state.getIn(['header', 'mouseIn']),
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleInputFocus() {
+    handleInputFocus(list) {
+      list.size === 0 && dispatch(actionCreator.getSearchList())
       dispatch(actionCreator.searchFocus())
     },
     handleInputBlur() {
       dispatch(actionCreator.searchBlur())
+    },
+    handleMouseEnter() {
+      dispatch(actionCreator.mouseEnter());
+    },
+    handleMouseLeave() {
+      dispatch(actionCreator.mouseLeave());
+    },
+    handleChangePage(page, totalPage) {
+      if (page < totalPage) {
+        dispatch(actionCreator.changePage(page + 1));
+      } else {
+        dispatch(actionCreator.changePage(1));
+      }
     }
   }
 }
