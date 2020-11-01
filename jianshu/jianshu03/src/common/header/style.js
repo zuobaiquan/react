@@ -131,7 +131,9 @@ export const SearchInfoSwitch = styled.div`
 		font-size: 18px;
     display: inline-block;
     vertical-align: middle;
-    margin: -4px 2px 0 0;
+		margin: -4px 2px 0 0;
+		transition: all .5s ease-in;
+		transform-origin: center center;
 	}
 `
 export const SearchInfoList = styled.ul`
