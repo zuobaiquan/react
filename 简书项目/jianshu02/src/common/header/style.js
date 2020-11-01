@@ -41,7 +41,7 @@ export const NavItem = styled.li`
 		color: #ea6f5a;
 	}
 `
-export const SearchWrapper = styled.div`
+export const SearchWrapper = styled.li`
   position: relative;
 `
 export const SearchInput = styled.input.attrs({
@@ -116,3 +116,48 @@ export const WriteBook = styled.a`
 		font-size:18px;
 	}
 `
+export const SearchInfo = styled.div`
+	position: absolute;
+	left: 20px;
+	top:47px;
+	width:240px;
+	width: 240px;
+	padding: 0 20px;
+	box-shadow: 0 0 8px rgba(0, 0, 0, .2);
+	background: #fff;
+	height:200px;
+	border-radius:2px;
+`
+export const SearchInfoTitle = styled.div`
+	margin-top: 20px;
+	margin-bottom: 15px;
+	line-height: 20px;
+	font-size: 14px;
+	color: #969696;	
+`;
+export const SearchInfoSwitch = styled.div`
+	float: right;
+	font-size: 13px;
+	cursor: pointer;
+	.iconfont{
+		font-size: 18px;
+    display: inline-block;
+    vertical-align: middle;
+    margin: -4px 2px 0 0;
+	}
+`
+export const SearchInfoList = styled.ul`
+	overflow: hidden;
+`
+export const SearchInfoItem = styled.a`
+	display: block;
+	float: left;
+	line-height: 20px;
+	padding: 0 5px;
+	margin-right: 10px;
+	margin-bottom: 15px;
+	font-size: 12px;
+	border: 1px solid #ddd;
+	color: #787878;
+	border-radius: 3px;
+`;

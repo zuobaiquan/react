@@ -10,6 +10,11 @@ import {
   SearchInput,
   WriteBook,
   SearchIcon,
+  SearchInfo,
+  SearchInfoTitle,
+  SearchInfoSwitch,
+  SearchInfoList,
+  SearchInfoItem,
 } from './style'
 class Header extends Component {
   render() {
@@ -27,6 +32,17 @@ class Header extends Component {
               onBlur={this.props.handleInputBlur}
             ></SearchInput>
             <SearchIcon className={focused ? 'focused' : ''}><span className="iconfont">&#xe64d;</span></SearchIcon>
+            <SearchInfo>
+              <SearchInfoTitle>热门搜索<SearchInfoSwitch><span className="iconfont">&#xe601;</span>换一批</SearchInfoSwitch></SearchInfoTitle>
+              <SearchInfoList>
+                <SearchInfoItem>教育</SearchInfoItem>
+                <SearchInfoItem>教育</SearchInfoItem>
+                <SearchInfoItem>教育</SearchInfoItem>
+                <SearchInfoItem>教育</SearchInfoItem>
+                <SearchInfoItem>教育</SearchInfoItem>
+                <SearchInfoItem>教育</SearchInfoItem>
+              </SearchInfoList>
+            </SearchInfo>
           </SearchWrapper>
         </Nav>
         <WriteBook><span className="iconfont">&#xe604;</span>写文章</WriteBook>
@@ -36,7 +52,8 @@ class Header extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    focused: state.getIn(['header', 'focused']),
+    // focused: state.getIn(['header', 'focused']),
+    focused: state.get('header').get('focused')
   }
 }
 const mapDispatchToProps = (dispatch) => {
