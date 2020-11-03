@@ -1,0 +1,1 @@
+export const GET_HOMRLIST = 'home/GET_HOMRLIST';
