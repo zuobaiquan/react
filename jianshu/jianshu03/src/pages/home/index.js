@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { actionCreator } from './store'
-import Header from '@/common/header'
+
 import Topic from './components/Topic';
+import List from './components/List';
 import {
   HomeWraper
 } from './style'
@@ -13,12 +14,10 @@ class Home extends Component {
   render() {
     // const { } = this.props
     return (
-      <>
-        <Header></Header>
-        <HomeWraper>
-          <Topic />
-        </HomeWraper>
-      </>
+      <HomeWraper>
+        <Topic />
+        <List />
+      </HomeWraper>
     )
   }
 }
@@ -30,8 +29,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getHomeData() {
-      dispatch(actionCreator.getHomeList());
-    }
+      dispatch(actionCreator.getHomeListData());
+    },
+    // getActicleData() {
+    //   dispatch(actionCreator.getActicleListData());
+    // }
   }
 }
 
