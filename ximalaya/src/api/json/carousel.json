@@ -1,0 +1,30 @@
+{
+  "status": 200,
+  "msg": "success",
+  "data": [
+    {
+      "id": 0,
+      "image": "https://aecpm.alicdn.com/imgextra/i4/3193139402/O1CN01ISNepm2JKARwSTotj_!!3193139402-0-alimamazszw.jpg",
+      "color": [
+        "#eee",
+        "#ddd"
+      ]
+    },
+    {
+      "id": 1,
+      "image": "https://img.alicdn.com/tfs/TB1wOidVWL7gK0jSZFBXXXZZpXa-520-280.jpg",
+      "color": [
+        "#eee",
+        "#ddd"
+      ]
+    },
+    {
+      "id": 2,
+      "image": "https://img.alicdn.com/imgextra/i3/6000000001010/O1CN01e9keZJ1JKcgLRRlx7_!!6000000001010-2-octopus.png",
+      "color": [
+        "#eee",
+        "#ddd"
+      ]
+    }
+  ]
+}
