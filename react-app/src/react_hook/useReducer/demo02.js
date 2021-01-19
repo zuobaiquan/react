@@ -20,6 +20,8 @@ function App() {
         }
     }
   }
+  // useReducer(reducer, initialState, initialFunc) 
+  // useReducer 接受三个参数
   const [state, dispatch] = useReducer(reducer, initialState)
   return (
     <div>
