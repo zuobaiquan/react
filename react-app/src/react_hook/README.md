@@ -17,4 +17,6 @@ https://www.cnblogs.com/marvintang1001/p/11867719.html
 
 `"plugins":[ "react-hooks" ], "rules":{ "react-hooks/rules-of-hooks": "error" }`
 
+react-hooks/exhaustive-deps  检查 effect 依赖
+
 userEffect 函数是在 render 之后调用的 ，其功能相当于 componentDidMount/和 componentDidUpdate，并且该函数有 callback 函数，其功能是清除上一次副作用 遗留下来的状态 相当于 componentWillUnmount
