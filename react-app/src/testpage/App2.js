@@ -1,4 +1,4 @@
-import React, { Component, memo } from 'react';
+import React, { Component, useEffect,memo } from 'react';
 // , PureComponent, memo, useState, useMemo, useCallback
 
 
@@ -34,6 +34,9 @@ class App extends Component {
 
 const Foo = function Foo(props) {
   console.log('Foo reander');
+  useEffect(()=>{
+    console.log(1111)
+  },[])
   return <div>1111子组件
       <App />
   </div>;

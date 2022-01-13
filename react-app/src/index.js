@@ -6,7 +6,7 @@ import './index.css';
 // import App from './why_use_memo/demo06';
 // import App from './react_hook/use_memo/demo04';
 // import App from './react_hook/useEffect/demo02';
-import App from './testpage/App2';
+import App from './testpage/App';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
