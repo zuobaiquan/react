@@ -1,9 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component,useEffect,memo } from 'react';
 // , PureComponent, memo, useState, useMemo, useCallback
 
 
 const Foo = memo(function Foo(props) {
   console.log('Foo reander');
+  useEffect(()=>{
+    console.log(55)
+  },[])
   return <div>子组件person.age的值：{props.person.age}</div>;
 })
 
